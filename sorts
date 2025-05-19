@@ -4,24 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorting Algorithms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #555;
+            text-align: left;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <h2>Sorting</h2>
-    <label for="numbers">Enter numbers (comma separated): </label>
-    <input type="text" id="numbers" placeholder="e.g. 5,3,8,1,2">
-    <br>
-    <br>
-    <label for="algorithm">Choose Sorting Algorithm:</label>
-    <select id="algorithm">
-        <option value="bubble">Bubble Sort</option>
-        <option value="insertion">Insertion Sort</option>
-        <option value="selection">Selection Sort</option>
-    </select>
+    <div class="container">
+        <h2>Sorting</h2>
+        <label for="numbers">Enter numbers (comma separated):</label>
+        <input type="text" id="numbers" placeholder="e.g. 5,3,8,1,2">
 
-    <button onclick="sortArray()">Sort</button>
-    
-    <h3>Sorted Output:</h3>
-    <p id="result"></p>
+        <label for="algorithm">Choose Sorting Algorithm:</label>
+        <select id="algorithm">
+            <option value="bubble">Bubble Sort</option>
+            <option value="insertion">Insertion Sort</option>
+            <option value="selection">Selection Sort</option>
+        </select>
+
+        <button onclick="sortArray()">Sort</button>
+
+        <h3>Sorted Output:</h3>
+        <p id="result"></p>
+    </div>
 
     <script>
         function bubbleSort(arr) {
@@ -67,10 +133,10 @@
         }
 
         function sortArray() {
-            input = document.getElementById("numbers").value;
-            arr = input.split(",").map(Number);
-            algorithm = document.getElementById("algorithm").value;
-            sortedArr = [];
+            const input = document.getElementById("numbers").value;
+            const arr = input.split(",").map(Number);
+            const algorithm = document.getElementById("algorithm").value;
+            let sortedArr = [];
 
             if (algorithm === "bubble") {
                 sortedArr = bubbleSort(arr);
