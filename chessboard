@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Responsive Chessboard</title>
+  <style>
+    body{
+      text-align: center;
+    }
+    header{
+      padding: 2em;
+      background-color: gray;
+      color: white;
+      font-size: x-large;
+    }
+    table {
+      margin: 20px auto;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Chessboard
+  </header>
+
+  <div>
+    <table>
+      <tbody>
+        <script>
+          for(let row=0; row<8; row++){
+            document.write('<tr>');
+              for(let col=0; col<8; col++){
+                let color = (row+col)%2===0 ? 'black' : 'white';
+                document.write(`<td style="background-color:${color};height:60px;width:60px;"></td>`);
+
+              }
+            document.write('</tr>');
+          }
+        </script>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    &copy; vipra
+  </footer>
+</body>
+</html>
