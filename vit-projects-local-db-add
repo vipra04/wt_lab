@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VIT Projects</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 30px;
+    }
+    .nav-pills .nav-link {
+      color: #fff;
+    }
+    .nav-pills .nav-link.active {
+      background-color: #0d6efd;
+      color: white;
+    }
+    .table thead {
+      background-color: #0d6efd;
+      color: white;
+    }
+    .table tbody tr:nth-child(odd) {
+      background-color: #1e1e1e;
+    }
+    .table tbody tr:nth-child(even) {
+      background-color: #2a2a2a;
+    }
+    label {
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="text-center mb-4">VIT Projects</h1>
+
+  <!-- Pills Navigation (centered) -->
+  <ul class="nav nav-pills justify-content-center mb-4" id="projectsTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="course-tab" data-bs-toggle="pill" data-bs-target="#course" type="button" role="tab" aria-controls="course" aria-selected="true">Course Projects</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="edi-tab" data-bs-toggle="pill" data-bs-target="#edi" type="button" role="tab" aria-controls="edi" aria-selected="false">EDI Projects</button>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="projectsTabContent">
+
+    <!-- Course Projects Tab -->
+    <div class="tab-pane fade show active" id="course" role="tabpanel" aria-labelledby="course-tab">
+      <div class="table-responsive mb-3">
+        <table class="table table-bordered table-striped" id="courseTable">
+          <thead>
+            <tr>
+              <th>Project Title</th>
+              <th>Subject</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Course projects inserted here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Add Project Form -->
+      <form id="addCourseProjectForm" class="mb-4">
+        <div class="mb-3">
+          <label for="courseProjectTitle" class="form-label">Project Title</label>
+          <input type="text" class="form-control" id="courseProjectTitle" placeholder="Enter project title" required />
+        </div>
+        <div class="mb-3">
+          <label for="courseProjectSubject" class="form-label">Subject</label>
+          <input type="text" class="form-control" id="courseProjectSubject" placeholder="Enter subject" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Add Course Project</button>
+      </form>
+    </div>
+
+    <!-- EDI Projects Tab -->
+    <div class="tab-pane fade" id="edi" role="tabpanel" aria-labelledby="edi-tab">
+      <div class="table-responsive mb-3">
+        <table class="table table-bordered table-striped" id="ediTable">
+          <thead>
+            <tr>
+              <th>Project Title</th>
+              <th>Subject</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- EDI projects inserted here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Add Project Form -->
+      <form id="addEdiProjectForm" class="mb-4">
+        <div class="mb-3">
+          <label for="ediProjectTitle" class="form-label">Project Title</label>
+          <input type="text" class="form-control" id="ediProjectTitle" placeholder="Enter project title" required />
+        </div>
+        <div class="mb-3">
+          <label for="ediProjectSubject" class="form-label">Subject</label>
+          <input type="text" class="form-control" id="ediProjectSubject" placeholder="Enter subject" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Add EDI Project</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const courseStorageKey = "vit_course_projects";
+  const ediStorageKey = "vit_edi_projects";
+
+  // Utility function to load projects from localStorage or empty array
+  function loadProjects(key) {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : [];
+  }
+
+  // Save projects to localStorage
+  function saveProjects(key, projects) {
+    localStorage.setItem(key, JSON.stringify(projects));
+  }
+
+  // Render projects into a table body (tbody element)
+  function renderProjects(key, tableBodySelector) {
+    const projects = loadProjects(key);
+    const tbody = $(tableBodySelector);
+    tbody.empty();
+
+    if (projects.length === 0) {
+      tbody.append('<tr><td colspan="2" class="text-center text-muted">No projects found</td></tr>');
+      return;
+    }
+
+    projects.forEach(proj => {
+      tbody.append(`<tr><td>${proj.title}</td><td>${proj.subject}</td></tr>`);
+    });
+  }
+
+  $(document).ready(function () {
+    // Initial render
+    renderProjects(courseStorageKey, "#courseTable tbody");
+    renderProjects(ediStorageKey, "#ediTable tbody");
+
+    // Handle adding Course Project
+    $("#addCourseProjectForm").submit(function (e) {
+      e.preventDefault();
+
+      const title = $("#courseProjectTitle").val().trim();
+      const subject = $("#courseProjectSubject").val().trim();
+      if (!title || !subject) return alert("Please fill in all fields.");
+
+      let projects = loadProjects(courseStorageKey);
+      // Avoid duplicates (optional)
+      if (projects.some(p => p.title.toLowerCase() === title.toLowerCase() && p.subject.toLowerCase() === subject.toLowerCase())) {
+        return alert("This project already exists in Course Projects.");
+      }
+
+      projects.push({ title, subject });
+      saveProjects(courseStorageKey, projects);
+      renderProjects(courseStorageKey, "#courseTable tbody");
+
+      // Clear inputs
+      $("#courseProjectTitle").val("");
+      $("#courseProjectSubject").val("");
+    });
+
+    // Handle adding EDI Project
+    $("#addEdiProjectForm").submit(function (e) {
+      e.preventDefault();
+
+      const title = $("#ediProjectTitle").val().trim();
+      const subject = $("#ediProjectSubject").val().trim();
+      if (!title || !subject) return alert("Please fill in all fields.");
+
+      let projects = loadProjects(ediStorageKey);
+      if (projects.some(p => p.title.toLowerCase() === title.toLowerCase() && p.subject.toLowerCase() === subject.toLowerCase())) {
+        return alert("This project already exists in EDI Projects.");
+      }
+
+      projects.push({ title, subject });
+      saveProjects(ediStorageKey, projects);
+      renderProjects(ediStorageKey, "#ediTable tbody");
+
+      // Clear inputs
+      $("#ediProjectTitle").val("");
+      $("#ediProjectSubject").val("");
+    });
+  });
+</script>
+
+</body>
+</html>
