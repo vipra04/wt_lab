@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculator</title>
+  <style>
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        flex-direction: column;
+    }
+    header{
+        background-color: rgb(248, 221, 225);
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+    table{
+        width: 100%;
+        padding: 10px;
+    }
+    .calculator{
+        background-color: aliceblue;
+        padding: 30px 55px;
+    }
+    .calculator button {
+        width: 50px;
+        height: 50px;
+        padding: 5px;
+        margin: 5px;
+        font-size: large;
+    }
+    .calculator input{
+        width: 250px;
+        height: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>Simple Calculator</h2>
+</header>
+
+<section>
+  <div class="calculator">
+    <input type="text" id="display" disabled />
+
+    <table>
+      <tr>
+        <td><button onclick="appendValue('7')">7</button></td>
+        <td><button onclick="appendValue('8')">8</button></td>
+        <td><button onclick="appendValue('9')">9</button></td>
+        <td><button class="operator" onclick="appendValue('/')">/</button></td>
+      </tr>
+      <tr>
+        <td><button onclick="appendValue('4')">4</button></td>
+        <td><button onclick="appendValue('5')">5</button></td>
+        <td><button onclick="appendValue('6')">6</button></td>
+        <td><button class="operator" onclick="appendValue('*')">*</button></td>
+      </tr>
+      <tr>
+        <td><button onclick="appendValue('1')">1</button></td>
+        <td><button onclick="appendValue('2')">2</button></td>
+        <td><button onclick="appendValue('3')">3</button></td>
+        <td><button class="operator" onclick="appendValue('-')">-</button></td>
+      </tr>
+      <tr>
+        <td><button onclick="appendValue('0')">0</button></td>
+        <td><button onclick="appendValue('%')">%</button></td>
+        <td><button class="clear" onclick="clearDisplay()">C</button></td>
+        <td><button class="operator" onclick="appendValue('+')">+</button></td>
+      </tr>
+      <tr>
+        <td colspan="4"><button class="equal" onclick="calculate()" style="width: 230px;">=</button></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<footer>
+  &copy; Vipra
+</footer>
+
+<script>
+  function appendValue(val) {
+    document.getElementById('display').value += val;
+  }
+
+  function clearDisplay() {
+    document.getElementById('display').value = '';
+  }
+
+  function calculate() {
+    try {
+      const result = eval(document.getElementById('display').value);
+      document.getElementById('display').value = result;
+    } catch (e) {
+      document.getElementById('display').value = 'Error';
+    }
+  }
+</script>
+
+</body>
+</html>
