@@ -1,0 +1,16 @@
+CREATE DATABASE online_bookstore;
+USE online_bookstore;
+
+CREATE TABLE books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255),
+    author VARCHAR(255),
+    price DECIMAL(10,2),
+    cover VARCHAR(255)  -- URL or local path of book cover image
+);
+
+-- (Optional) Insert sample books
+INSERT INTO books (title, author, price, cover) VALUES
+('Clean Code', 'Robert C. Martin', 350.00, 'covers/clean_code.jpg'),
+('You Don\'t Know JS', 'Kyle Simpson', 250.00, 'covers/ydkjs.jpg'),
+('Eloquent JavaScript', 'Marijn Haverbeke', 300.00, 'covers/eloquent_js.jpg');
