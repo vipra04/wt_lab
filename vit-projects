@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VIT Projects</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding: 30px;
+    }
+    .form-section {
+      margin-top: 20px;
+    }
+    .form-control, .btn {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center mb-4">VIT Projects</h2>
+
+  <!-- Bootstrap Pills -->
+  <ul class="nav nav-pills mb-3" id="projectTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="course-tab" data-bs-toggle="pill" data-bs-target="#course" type="button" role="tab">Course Projects</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="edi-tab" data-bs-toggle="pill" data-bs-target="#edi" type="button" role="tab">EDI Projects</button>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content" id="projectTabContent">
+    <!-- Course Projects -->
+    <div class="tab-pane fade show active" id="course" role="tabpanel">
+      <h4>Course Projects</h4>
+      <form id="courseForm" class="form-section">
+        <input type="text" class="form-control" id="courseTitle" placeholder="Project Title" required />
+        <textarea class="form-control" id="courseDesc" placeholder="Project Description" required></textarea>
+        <button type="submit" class="btn btn-primary">Add Course Project</button>
+      </form>
+      <table class="table table-bordered mt-3" id="courseTable">
+        <thead><tr><th>Title</th><th>Description</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- EDI Projects -->
+    <div class="tab-pane fade" id="edi" role="tabpanel">
+      <h4>EDI Projects</h4>
+      <form id="ediForm" class="form-section">
+        <input type="text" class="form-control" id="ediTitle" placeholder="Project Title" required />
+        <textarea class="form-control" id="ediDesc" placeholder="Project Description" required></textarea>
+        <button type="submit" class="btn btn-success">Add EDI Project</button>
+      </form>
+      <table class="table table-bordered mt-3" id="ediTable">
+        <thead><tr><th>Title</th><th>Description</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    // Load stored data on page load
+    loadProjects("course");
+    loadProjects("edi");
+
+    // Add Course Project
+    $('#courseForm').submit(function (e) {
+      e.preventDefault();
+      const title = $('#courseTitle').val().trim();
+      const desc = $('#courseDesc').val().trim();
+      if (title && desc) {
+        addProject("course", title, desc);
+        $('#courseTitle').val('');
+        $('#courseDesc').val('');
+      }
+    });
+
+    // Add EDI Project
+    $('#ediForm').submit(function (e) {
+      e.preventDefault();
+      const title = $('#ediTitle').val().trim();
+      const desc = $('#ediDesc').val().trim();
+      if (title && desc) {
+        addProject("edi", title, desc);
+        $('#ediTitle').val('');
+        $('#ediDesc').val('');
+      }
+    });
+
+    function addProject(type, title, description) {
+      const key = type + "Projects";
+      let projects = JSON.parse(localStorage.getItem(key)) || [];
+      projects.push({ title, description });
+      localStorage.setItem(key, JSON.stringify(projects));
+      loadProjects(type);
+    }
+
+    function loadProjects(type) {
+      const key = type + "Projects";
+      let projects = JSON.parse(localStorage.getItem(key)) || [];
+      const tableBody = $(`#${type}Table tbody`);
+      tableBody.empty();
+      projects.forEach(proj => {
+        tableBody.append(`<tr><td>${proj.title}</td><td>${proj.description}</td></tr>`);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
