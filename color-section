@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Color Changer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header, section, footer {
+      padding: 20px;
+      text-align: center;
+      border: 1px solid black;
+    }
+
+    #colorSection {
+      background-color: lightblue;
+      transition: background-color 0.5s ease;
+    }
+
+    .btn {
+      margin: 15px;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 100px;
+    }
+
+    .blue { background-color: blue; color: white; }
+    .red { background-color: red; color: white; }
+    .orange { background-color: orange; color: white; }
+
+    .box{
+        border: 2px solid black;
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Section Color Changer</h1>
+  </header>
+
+  <div class="box">
+  <section id="colorSection">
+    <h2>This is the color-changing section</h2>
+    <p>Click a button below to change my background color.</p>
+  </section>
+
+  <footer>
+    <button class="btn blue" onclick="changeColor('blue')"></button>
+    <button class="btn red" onclick="changeColor('red')"></button>
+    <button class="btn orange" onclick="changeColor('orange')"></button>
+  </footer>
+
+  </div>
+
+  <footer>
+    <p>
+        &copy;Vipra
+    </p>
+  </footer>
+
+  <script>
+    function changeColor(color) {
+      section = document.getElementById("colorSection");
+      section.style.backgroundColor = color;
+    }
+  </script>
+
+</body>
+</html>
+  
