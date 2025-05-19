@@ -1,0 +1,25 @@
+CREATE DATABASE grocery_db;
+USE grocery_db;
+
+-- Table: Consumer
+CREATE TABLE Consumer (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(100)
+);
+
+-- Table: Items
+CREATE TABLE Items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    price DECIMAL(10,2),
+    category VARCHAR(50),
+    image VARCHAR(255)  -- relative path to image file
+);
+
+-- Sample items
+INSERT INTO Items (name, price, category, image) VALUES
+('Rice (1kg)', 55.00, 'Grains', 'images/rice.jpg'),
+('Milk (1L)', 30.00, 'Dairy', 'images/milk.jpg'),
+('Apples (1kg)', 120.00, 'Fruits', 'images/apples.jpg');
