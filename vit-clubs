@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VIT Clubs</title>
+
+    <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+        background-color: #121212;
+        color: #ffffff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif;
+      }
+      .nav-pills .nav-link {
+        color: #ffffff;
+      }
+      .nav-pills .nav-link.active {
+        background-color: #007bff;
+        color: white;
+      }
+      .list-group-item {
+        background-color: #2c2c2c;
+        color: #f0f0f0;
+      }
+  </style>
+
+  </head>
+
+  <body>
+    <div class="container mt-4 mb-2">
+      <h1 class="text-center">VIT Clubs</h1>
+      <p class="text-center mt-3">Life at Vishwakarma Institute of Technology (VIT), Pune, offers a vibrant blend of academics, co-curricular activities, and personal growth. Students engage in sports, arts, technical clubs, and community service, fostering creativity, leadership, and holistic development. With a strong focus on innovation, skill-building, and career preparation, VIT provides an environment where students can thrive both academically and personally.</p>
+
+      <!-- Pills-->
+      <ul class="nav nav-pills justify-content-center mb-5">
+        <li class="nav-item">
+          <a class="nav-link active" data-bs-toggle="pill" href="#tech">Technical</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="pill" href="#cultural">Cultural</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="pill" href="#sports">Sports</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="pill" href="#literary">Literary</a>
+        </li>
+      </ul> 
+      
+      <!--Content-->
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="tech">
+          <div class="row align-items-center">
+            <div class="col-md-7">
+              <h3>Technical Club</h3>
+              <p>The Technical Club at VIT fuels creativity and innovation. From hands-on workshops and coding competitions to robotics and AI projects – this is where techies come to play, learn, and build the future.</p>
+              <ul class="list-group mt-3">
+                <li class="list-group-item">IEEE Student Branch</li>
+                <li class="list-group-item">Google Developer Students Club</li>
+                <li class="list-group-item">TRF - The Robotics Forum</li>
+                <li class="list-group-item">Team Griffin India</li>
+                <li class="list-group-item">Team Veloce Racing</li>
+              </ul>
+            </div>
+            <!--order-md-last for reverse the order on mobile devices (i.e., make the image appear first on mobile and text second), while keeping the original order (text first and image second) on larger screens-->
+            <div class="col-md-5 order-md-last mt-5">
+              <img src="https://media.istockphoto.com/id/1356364287/photo/close-up-focus-on-persons-hands-typing-on-the-desktop-computer-backlit-keyboard-screens-show.jpg?s=612x612&w=0&k=20&c=ijjq-DLNxIaPuGvIX8k06IZxMAjGpyJeboaV_byCX9k=" class="img-fluid rounded mb-3" alt="Technical Club" />
+            </div>
+          </div>
+        </div>
+      
+        <div class="tab-pane fade" id="cultural">
+          <div class="row align-items-center">
+            <div class="col-md-7">
+              <h3>Cultural Club</h3>
+              <p>The Cultural Club celebrates rhythm, color, and creativity. Dance, music, theater, and art – come express yourself and be part of unforgettable campus festivals.</p>
+              <ul class="list-group mt-3">
+                <li class="list-group-item">Zephyr (Dance Club)</li>
+                <li class="list-group-item">V-Rock (Music Club)</li>
+                <li class="list-group-item">Viculp (Drama Club)</li>
+                <li class="list-group-item">Aesthetics (Art Club)</li>
+                <li class="list-group-item">V-Click (Photography Club)</li>
+              </ul>
+            </div>
+            <div class="col-md-5 order-md-last mt-5">
+              <img src="https://cdn.pixabay.com/photo/2021/04/07/13/09/headphones-6159058_1280.jpg" class="img-fluid rounded mb-3" alt="Cultural Club" />
+            </div>
+          </div>
+        </div>
+      
+        <div class="tab-pane fade" id="sports">
+          <div class="row align-items-center">
+            <div class="col-md-7">
+              <h3>Sports Club</h3>
+              <p>Balance your brain with brawn! The Sports Club promotes fitness and fun through regular tournaments, fitness challenges, and spirited competitions across all major sports.</p>
+              <ul class="list-group mt-3">
+                <li class="list-group-item">Football Club</li>
+                <li class="list-group-item">Cricket Club</li>
+                <li class="list-group-item">Basketball Club</li>
+                <li class="list-group-item">Athletics and Gym Club</li>
+                <li class="list-group-item">Table Tennis Club</li>
+              </ul>
+            </div>
+            <div class="col-md-5 order-md-last mt-5">
+              <img src="https://cdn.pixabay.com/photo/2014/10/14/20/24/football-488714_1280.jpg" class="img-fluid rounded mb-3" alt="Sports Club" />
+            </div>
+          </div>
+        </div>
+      
+        <div class="tab-pane fade" id="literary">
+          <div class="row align-items-center">
+            <div class="col-md-7">
+              <h3>Literary Club</h3>
+              <p>Words matter! The Literary Club hosts poetry slams, book discussions, debates, and writing contests. It's a space to think critically, express creatively, and communicate powerfully.</p>
+              <ul class="list-group mt-3">
+                <li class="list-group-item">MUN Society</li>
+                <li class="list-group-item">VEH Expression Hub</li>
+                <li class="list-group-item">V-EDC (Entrepreneurship Club)</li>
+                <li class="list-group-item">Speakers Club</li>
+              </ul>
+            </div>
+            <div class="col-md-5 order-md-last mt-5">
+              <img src="https://media.istockphoto.com/id/499517325/photo/a-man-speaking-at-a-business-conference.jpg?s=612x612&w=0&k=20&c=gWTTDs_Hl6AEGOunoQ2LsjrcTJkknf9G8BGqsywyEtE=" class="img-fluid rounded mb-3" alt="Literary Club" />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    <!--Bootstrap 5 doesn't necessarily require jQuery with data-bs-toggle -->
+    <script>
+      $(document).ready(function () {
+        $('#clubTabs a').on('click', function (e) {
+          e.preventDefault();
+          $(this).tab('show');
+        });
+      });
+    </script>
+
+  </body>
+</html>
