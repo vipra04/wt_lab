@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricity Bill Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-size: 1.1em;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 1.1em;
+            border: none;
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #result h2 {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Electricity Bill Calculator</h1>
+        <form id="bill-form">
+            <label for="units">Enter Units Consumed:</label>
+            <input type="number" id="units" name="units" min="0" required>
+            <button type="submit">Calculate Bill</button>
+        </form>
+        <div id="result">
+            <h2>Your Electricity Bill: Rs. <span id="bill-amount">0.00</span></h2>
+        </div>
+    </div>
+
+    <script>
+        // Function to calculate the electricity bill based on units consumed
+        function calculateBill(units) {
+            let billAmount = 0;
+            if (units <= 50) {
+                billAmount = units * 3.5;
+            } else if (units <= 150) {
+                billAmount = 50 * 3.5 + (units - 50) * 4.0;
+            } else if (units <= 250) {
+                billAmount = 50 * 3.5 + 100 * 4.0 + (units - 150) * 5.2;
+            } else {
+                billAmount = 50 * 3.5 + 100 * 4.0 + 100 * 5.2 + (units - 250) * 6.5;
+            }
+            return billAmount.toFixed(2);
+        }
+
+        // Event listener for form submission
+        document.getElementById('bill-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const units = document.getElementById('units').value;
+            
+            // Check if the input is valid
+            if (units < 0 || isNaN(units)) {
+                alert("Please enter a valid number of units.");
+                return;
+            }
+            
+            // Calculate the bill
+            const bill = calculateBill(units);
+            
+            // Store the result in localStorage
+            localStorage.setItem('billAmount', bill);
+
+            // Display the result
+            document.getElementById('bill-amount').textContent = bill;
+            document.getElementById('result').style.display = 'block';
+        });
+
+        // On page load, check if a bill is already stored in localStorage
+        window.onload = function() {
+            const storedBill = localStorage.getItem('billAmount');
+            if (storedBill) {
+                document.getElementById('bill-amount').textContent = storedBill;
+                document.getElementById('result').style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>
