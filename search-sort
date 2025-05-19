@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search & Sort Arrays</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background: #f8f9fa;
+    }
+    .card {
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Array Search & Sort (JavaScript + jQuery)</h1>
+
+    <!-- Integer Array Section -->
+    <div class="card mb-4">
+      <div class="card-header">Integer Array</div>
+      <div class="card-body">
+        <p><strong>Array:</strong> <span id="int-array"></span></p>
+        <button class="btn btn-primary" id="sort-integers">Sort Integers</button>
+        <input type="number" id="int-search" class="form-control d-inline w-25 ml-2" placeholder="Search integer"/>
+        <button class="btn btn-success" id="search-integer">Search</button>
+        <p class="mt-3" id="int-result"></p>
+      </div>
+    </div>
+
+    <!-- Named Entity Array Section -->
+    <div class="card">
+      <div class="card-header">Named Entity Array (e.g., Students)</div>
+      <div class="card-body">
+        <p><strong>Array of Names:</strong> <span id="name-array"></span></p>
+        <input type="text" id="name-search" class="form-control d-inline w-50" placeholder="Search name"/>
+        <button class="btn btn-success ml-2" id="search-name">Search</button>
+        <p class="mt-3" id="name-result"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery + Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script -->
+  <script>
+    $(document).ready(function () {
+      // Integer array
+      let intArray = [42, 15, 9, 67, 28, 13];
+      $("#int-array").text(intArray.join(", "));
+
+      // Named entity array
+      let nameArray = ["Alice", "Bob", "Charlie", "David", "Eve"];
+      $("#name-array").text(nameArray.join(", "));
+
+      // Sort integers
+      $("#sort-integers").click(function () {
+        intArray.sort((a, b) => a - b);
+        $("#int-array").text(intArray.join(", "));
+      });
+
+      // Search integer
+      $("#search-integer").click(function () {
+        let searchValue = parseInt($("#int-search").val());
+        let index = intArray.indexOf(searchValue);
+        if (!isNaN(searchValue)) {
+          if (index !== -1) {
+            $("#int-result").text(`Found ${searchValue} at index ${index}`);
+          } else {
+            $("#int-result").text(`${searchValue} not found in array.`);
+          }
+        } else {
+          $("#int-result").text(`Please enter a valid number.`);
+        }
+      });
+
+      // Search name
+      $("#search-name").click(function () {
+        let searchName = $("#name-search").val().trim().toLowerCase();
+        let found = nameArray.find(name => name.toLowerCase() === searchName);
+        if (searchName.length > 0) {
+          if (found) {
+            $("#name-result").text(`Found name: ${found}`);
+          } else {
+            $("#name-result").text(`Name not found.`);
+          }   
+        } else {
+          $("#name-result").text(`Please enter a name to search.`);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
