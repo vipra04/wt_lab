@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BST Array Sort & Search</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background: #f8f9fa;
+    }
+    .card {
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">BST Array Sort & Search (JavaScript)</h1>
+
+    <!-- Integer Array Section -->
+    <div class="card mb-4">
+      <div class="card-header">Integer Array with BST</div>
+      <div class="card-body">
+        <p><strong>Array:</strong> <span id="int-array"></span></p>
+
+        <!-- Add Integer -->
+        <input type="number" id="int-add" class="form-control d-inline w-25 mr-2" placeholder="Add integer"/>
+        <button class="btn btn-info mb-2" id="add-integer">Add Integer</button><br/>
+
+        <!-- Sort and Search -->
+        <button class="btn btn-primary" id="sort-integers">Sort Integers (BST)</button>
+        <input type="number" id="int-search" class="form-control d-inline w-25 ml-2" placeholder="Search integer"/>
+        <button class="btn btn-success" id="search-integer">Search</button>
+
+        <p class="mt-3" id="int-result"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery + Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script -->
+  <script>
+    $(document).ready(function () {
+      // Binary Search Tree Node
+      function TreeNode(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+      }
+
+      // BST Class
+      function BST() {
+        this.root = null;
+
+        this.insert = function(value) {
+          const newNode = new TreeNode(value);
+          if (this.root === null) {
+            this.root = newNode;
+          } else {
+            this._insertNode(this.root, newNode);
+          }
+        };
+
+        this._insertNode = function(node, newNode) {
+          if (newNode.value < node.value) {
+            if (node.left === null) {
+              node.left = newNode;
+            } else {
+              this._insertNode(node.left, newNode);
+            }
+          } else {
+            if (node.right === null) {
+              node.right = newNode;
+            } else {
+              this._insertNode(node.right, newNode);
+            }
+          }
+        };
+
+        this.inOrderTraversal = function(node, result = []) {
+          if (node !== null) {
+            this.inOrderTraversal(node.left, result);
+            result.push(node.value);
+            this.inOrderTraversal(node.right, result);
+          }
+          return result;
+        };
+
+        this.search = function(node, value) {
+          if (node === null) return false;
+          if (value === node.value) return true;
+          if (value < node.value) return this.search(node.left, value);
+          return this.search(node.right, value);
+        };
+      }
+
+      // Initialize array and BST
+      let intArray = [];
+      let bst = new BST();
+      intArray.forEach(num => bst.insert(num));
+      $("#int-array").text(intArray.join(", "));
+
+      // Add Integer
+      $("#add-integer").click(function () {
+        let newVal = parseInt($("#int-add").val());
+        if (!isNaN(newVal)) {
+          intArray.push(newVal);
+          bst.insert(newVal);
+          $("#int-array").text(intArray.join(", "));
+          $("#int-add").val("");
+          $("#int-result").text(`Added ${newVal} to the array.`);
+        } else {
+          $("#int-result").text("Please enter a valid number to add.");
+        }
+      });
+
+      // Sort using BST
+      $("#sort-integers").click(function () {
+        let sorted = bst.inOrderTraversal(bst.root);
+        $("#int-array").text(sorted.join(", "));
+        $("#int-result").text("Array sorted using BST (in-order traversal).");
+      });
+
+      // Search using BST
+      $("#search-integer").click(function () {
+        let searchVal = parseInt($("#int-search").val());
+        if (!isNaN(searchVal)) {
+          let found = bst.search(bst.root, searchVal);
+          if (found) {
+            $("#int-result").text(`Found ${searchVal} in the BST.`);
+          } else {
+            $("#int-result").text(`${searchVal} not found in the BST.`);
+          }
+        } else {
+          $("#int-result").text("Please enter a valid number to search.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
